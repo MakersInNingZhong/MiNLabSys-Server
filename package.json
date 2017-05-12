@@ -1,0 +1,22 @@
+{
+  "name": "minlabsys-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MakersInNingZhong/MiNLabSys-Server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MakersInNingZhong/MiNLabSys-Server/issues"
+  },
+  "homepage": "https://github.com/MakersInNingZhong/MiNLabSys-Server#readme",
+  "dependencies": {
+    "mysql": "^2.13.0"
+  }
+}
