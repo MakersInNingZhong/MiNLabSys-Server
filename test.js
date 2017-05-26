@@ -12,16 +12,17 @@ var connection = mysql.createConnection({
     database: dbinfo.db
 });
 
+connection.connect();
+
 app.use(bodyParser.json());
 
 app.post("/", function (req, res) {
-    connection.connect();
-    connection.query('select * from member where name='+req.body.name, function (err, rows, fields) {
+    connection.query('select uid from member where name=' + mysql.escape(req.body.name), function (err, rows, fields) {
         if (err) throw err;
         console.log(rows[0]);
+	var j = { uid: rows[0].uid, msg: "ok"};
+	res.json(j);
     });
-    connection.end();
-    res.send("ok");
 });
 
 app.listen(port);
