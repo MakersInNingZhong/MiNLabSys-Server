@@ -14,21 +14,23 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+server.disable("x-powered-by");
+server.disable("etag");
+
 server.use(bodyParser.json());
 
 server.post("/door", function (req, res) {
     uid_string = req.body.uid.join(",");
-    try {
-        connection.query("select name from member where uid=?", [uid_string], function (err, results) {
-            if (err) throw err;
+    connection.query("select name from member where uid=?", [uid_string], function (err, results) {
+        if (err) {
+            console.error("ERROR " + err);
+            res.json({ name: "" })
+        }
+        else {
             var return_json = { name: results[0].name };
             res.json(return_json);
-        });
-    }
-    catch (err) {
-        console.error(err);
-        res.send(500, "DB Error");
-    }
+        }
+    });
 });
 
 server.listen(port, function () {
