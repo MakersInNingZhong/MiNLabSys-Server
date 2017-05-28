@@ -24,11 +24,16 @@ server.post("/door", function (req, res) {
     connection.query("select name from member where uid=?", [uid_string], function (err, results) {
         if (err) {
             console.error("ERROR " + err);
-            res.json({ name: "" })
+            res.send(500, "DB ERROR!")
         }
         else {
-            var return_json = { name: results[0].name };
-            res.json(return_json);
+            if (typeof (results[0]) == undefined) {
+                res.json({ name: "" });
+            }
+            else {
+                var return_json = { name: results[0].name };
+                res.json(return_json);
+            }
         }
     });
 });
