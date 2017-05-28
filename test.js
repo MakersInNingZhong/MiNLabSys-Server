@@ -16,14 +16,21 @@ connection.connect();
 
 server.use(bodyParser.json());
 
-server.post("/", function (req, res) {
-    connection.query('select uid from member where name=' + mysql.escape(req.body.name), function (err, rows, fields) {
-        if (err) throw err;
-        console.log(rows[0]);
-	var j = { uid: rows[0].uid, msg: "ok"};
-	res.json(j);
-    });
+server.post("/door", function (req, res) {
+    uid_string = req.body.uid.join(",");
+    try {
+        connection.query("select name from member where uid=?", [uid_string], function (err, results) {
+            if (err) throw err;
+            var return_json = { name: results[0].name };
+            res.json(return_json);
+        });
+    }
+    catch (err) {
+        console.error(err);
+        res.send(500, "DB Error");
+    }
 });
 
-server.listen(port);
-console.log("Listening on port " + port);
+server.listen(port, function () {
+    console.log("Listening on port " + port);
+});
