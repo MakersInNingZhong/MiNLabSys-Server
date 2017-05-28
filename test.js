@@ -27,7 +27,7 @@ server.post("/door", function (req, res) {
             res.send(500, "DB ERROR!")
         }
         else {
-            if (typeof (results[0]) == undefined) {
+            if (typeof (results) === "undefined") {
                 res.json({ name: "" });
             }
             else {
