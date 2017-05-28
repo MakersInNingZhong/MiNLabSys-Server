@@ -1,5 +1,5 @@
 var express = require("express");
-var app = express();
+var server = express();
 var bodyParser = require("body-parser");
 var port = 3000;
 var mysql = require('mysql');
@@ -14,9 +14,9 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-app.use(bodyParser.json());
+server.use(bodyParser.json());
 
-app.post("/", function (req, res) {
+server.post("/", function (req, res) {
     connection.query('select uid from member where name=' + mysql.escape(req.body.name), function (err, rows, fields) {
         if (err) throw err;
         console.log(rows[0]);
@@ -25,5 +25,5 @@ app.post("/", function (req, res) {
     });
 });
 
-app.listen(port);
+server.listen(port);
 console.log("Listening on port " + port);
