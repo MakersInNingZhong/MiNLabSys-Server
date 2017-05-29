@@ -27,10 +27,11 @@ server.post("/door", function (req, res) {
             res.send(500, "DB ERROR!")
         }
         else {
-            if (typeof (results) === "undefined") {
+            if (typeof (results[0]) === "undefined") {
                 res.json({ name: "" });
             }
             else {
+                console.log(results[0].name + " has opened the door!");
                 var return_json = { name: results[0].name };
                 res.json(return_json);
             }
