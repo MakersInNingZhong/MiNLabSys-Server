@@ -19,6 +19,7 @@ dbinfo.json should be like this:
 After that, just simply run:
 
 ```bash
+$ npm install
 $ node server
 ```
 
