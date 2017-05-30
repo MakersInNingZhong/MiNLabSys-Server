@@ -21,16 +21,17 @@ server.use(bodyParser.json());
 
 server.post("/door", function (req, res) {
     uid_string = req.body.uid.join(",");
-    connection.query("select name from member where uid=?", [uid_string], function (err, results) {
+    connection.query("select * from member where uid=?", [uid_string], function (err, results) {
         if (err) {
             console.error("ERROR " + err);
             res.send(500, "DB ERROR!")
         }
         else {
+            var nowdate = new Date();
             if (typeof (results[0]) === "undefined") {
                 res.json({ name: "" });
             }
-            else if (results[0].enddate > Date()){
+            else if (results[0].enddate < nowdate){
                 res.json({ name: "" });
             }
             else {
