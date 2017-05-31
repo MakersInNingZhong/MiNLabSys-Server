@@ -35,7 +35,7 @@ server.post("/door", function (req, res) {
                 res.json({ name: "" });
             }
             else {
-                console.log(nowdate + ":" results[0].name + " has opened the door!");
+                console.log(nowdate + ":" + results[0].name + " has opened the door!");
                 var return_json = { name: results[0].name };
                 res.json(return_json);
             }
